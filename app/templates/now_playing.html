@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% block content %}
+<style>
+  /* Hide the global player bar on Now Playing page */
+  .player-container { display: none; }
+  /* Center text on Now Playing page */
+  .now-playing-page { text-align: center; }
+</style>
+
+<div class="now-playing-page">
+  <div class="now-playing-details">
+    <img id="npCover" class="now-playing-cover" src="{{ song.cover_art_data_uri|default('default_cover.jpg') }}" alt="Cover Art">
+    <div class="now-playing-meta">
+      <h2 id="npTitle">{{ song.title }}</h2>
+      <p id="npArtist">Artist: {{ song.artist }}</p>
+      <p id="npAlbum">Album: {{ song.album|default('Unknown') }}</p>
+    </div>
+  </div>
+  <!-- Control bar on Now Playing page -->
+  <div class="now-playing-controls">
+    <button id="npPrevBtn" title="Previous Track">⏮</button>
+    <button id="npPlayPauseBtn" title="Play/Pause">⏯</button>
+    <button id="npNextBtn" title="Next Track">⏭</button>
+  </div>
+  <div class="progress-container">
+    <span id="currentTime">0:00</span>
+    <input type="range" id="progressBar" value="0" min="0" max="100" step="1">
+    <span id="totalTime">0:00</span>
+  </div>
+  <a href="{{ url_for('main.dashboard') }}" class="back-link">Back to Dashboard</a>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    // Load global playlist if available
+    let storedPlaylist = localStorage.getItem("globalPlaylist");
+    let storedIndex = localStorage.getItem("currentTrackIndex");
+    if (storedPlaylist) {
+      try {
+        playlist = JSON.parse(storedPlaylist);
+        currentTrackIndex = storedIndex ? parseInt(storedIndex) : 0;
+        console.log("Loaded playlist from localStorage:", playlist, currentTrackIndex);
+      } catch(e) {
+        console.error("Error parsing playlist:", e);
+        playlist = [];
+        currentTrackIndex = 0;
+      }
+    }
+    // If no playlist, use the current song from the route and add it to the playlist
+    if (playlist.length === 0) {
+      let fallbackTrack = {
+        songId: "{{ song.id }}",
+        songUrl: "{{ url_for('main.uploaded_file', filename=song.file_path) }}",
+        title: "{{ song.title }}",
+        artist: "{{ song.artist }}",
+        album: "{{ song.album|default('Unknown') }}",
+        coverImage: "{{ song.cover_art_data_uri|default('default_cover.jpg') }}"
+      };
+      playlist.push(fallbackTrack);
+      currentTrackIndex = 0;
+      savePlaylist();
+    }
+    // Set the audio source
+    audio.src = playlist[currentTrackIndex].songUrl;
+    console.log("Now Playing page: audio.src =", audio.src);
+    audio.load();
+    audio.play().then(() => {
+      console.log("Now Playing: audio is playing.");
+    }).catch(function(err) {
+      console.error("Error playing audio on Now Playing page:", err);
+    });
+  });
+</script>
+{% endblock %}

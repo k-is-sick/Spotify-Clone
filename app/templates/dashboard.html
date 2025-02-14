@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% block content %}
+  <h2 class="center-text">Welcome, {{ current_user.username }}</h2>
+
+  <section class="upload-section center-text">
+    <h3>Upload a New Song</h3>
+    <form action="{{ url_for('upload.upload') }}" method="POST" enctype="multipart/form-data">
+      <input type="file" name="file" required>
+      <button type="submit">Upload</button>
+    </form>
+  </section>
+
+  <section class="songs-section">
+    <h3 class="center-text">All Songs</h3>
+    {% if songs %}
+      <ul class="song-list">
+        {% for song in songs %}
+          <li>
+            <div class="song-info">
+              <p><strong>{{ song.title }}</strong> by {{ song.artist }}</p>
+              <small>{{ song.duration|round(2) }} sec</small>
+            </div>
+            <div class="song-actions">
+              <button class="play-button"
+                      data-song-id="{{ song.id }}"
+                      data-url="{{ url_for('main.uploaded_file', filename=song.file_path) }}"
+                      data-title="{{ song.title }}"
+                      data-artist="{{ song.artist }}"
+                      data-album="{{ song.album|default('Unknown') }}"
+                      data-cover="{{ song.cover_art_data_uri|default('default_cover.jpg') }}">
+                Play
+              </button>
+              <a href="{{ url_for('main.now_playing', song_id=song.id) }}" class="view-full-details">
+                View Full Details
+              </a>
+            </div>
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p class="center-text">No songs available. Upload one to get started!</p>
+    {% endif %}
+  </section>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      document.querySelectorAll(".play-button").forEach(function(button) {
+        button.addEventListener("click", function() {
+          const songId = button.getAttribute("data-song-id");
+          const url = button.getAttribute("data-url");
+          const title = button.getAttribute("data-title");
+          const artist = button.getAttribute("data-artist");
+          const album = button.getAttribute("data-album");
+          const cover = button.getAttribute("data-cover");
+          playSongDetailed(songId, url, title, artist, album, cover);
+        });
+      });
+    });
+  </script>
+{% endblock %}

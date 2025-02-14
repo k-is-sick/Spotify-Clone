@@ -1,0 +1,303 @@
+/* Reset some default margins */
+body, h1, h2, h3, p, ul, li, nav, footer {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #121212;
+    color: #fff;
+    line-height: 1.6;
+  }
+  /* Centering Content*/
+  .centered-container {
+    text-align: center;
+    margin: 40px auto;
+    padding: 20px;
+    max-width: 500px;
+  }
+  
+  
+  /* Container for proper spacing */
+  .container {
+    width: 90%;
+    max-width: 1200px;
+    margin: auto;
+  }
+  
+  /* Header styling */
+  header {
+    background-color: #1DB954; /* Spotify green */
+    padding: 10px 0;
+  }
+  
+  header h1 {
+    display: inline-block;
+    font-size: 1.8em;
+    margin-left: 10px;
+  }
+  
+  header nav {
+    display: inline-block;
+    float: right;
+    margin-right: 10px;
+  }
+  
+  header nav a {
+    color: #fff;
+    text-decoration: none;
+    margin-left: 15px;
+    font-weight: bold;
+    transition: color 0.3s ease;
+  }
+  
+  header nav a:hover {
+    color: #000;
+  }
+  
+  /* Main content styling */
+  .content {
+    padding: 20px 0;
+  }
+  
+  /* Flash messages */
+  .flash-messages {
+    background-color: #ffcc00;
+    padding: 10px;
+    margin-bottom: 15px;
+    color: #000;
+  }
+  
+  /* Footer styling */
+  footer {
+    background-color: #1e1e1e;
+    text-align: center;
+    padding: 10px 0;
+    font-size: 0.9em;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+  }
+  
+  /* Buttons */
+  button {
+    background-color: #1DB954;
+    border: none;
+    padding: 8px 15px;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    border-radius: 20px;
+    font-weight: bold;
+  }
+  
+  button:hover {
+    background-color: #17a74a;
+  }
+  
+  /* Dashboard styling for song list */
+  .song-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .song-list li {
+    background: #1e1e1e;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .song-list li p {
+    margin: 0;
+  }
+  
+  /* Global Player Bar Styles */
+  .player-container {
+    position: fixed;
+    bottom: 40px; /* Leave space for the fixed footer */
+    left: 0;
+    width: 100%;
+    background-color: #1e1e1e;
+    padding: 10px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  .player-inner {
+    width: 100%;
+    max-width: 800px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .player-info {
+    margin-bottom: 5px;
+    font-size: 1em;
+    color: #fff;
+  }
+  
+  .player-controls {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 5px;
+  }
+  
+  .player-controls button {
+    background-color: #1DB954;
+    border: none;
+    padding: 10px;
+    margin: 0 5px;
+    color: #fff;
+    font-size: 1.2em;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .player-controls button:hover {
+    background-color: #17a74a;
+  }
+  
+  .progress-container {
+    width: 90%;
+    padding: 0 20px;
+  }
+  
+  #progressBar {
+    width: 100%;
+    -webkit-appearance: none;
+    background: #333;
+    height: 6px;
+    border-radius: 3px;
+    outline: none;
+    cursor: pointer;
+  }
+  
+  #progressBar::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 14px;
+    height: 14px;
+    background: #1DB954;
+    border-radius: 50%;
+  }
+  
+  /* Song Details Sidebar Styles */
+  .song-details-sidebar {
+    position: fixed;
+    right: 0;
+    top: 60px; /* Adjust to your header height */
+    width: 250px;
+    background-color: #1e1e1e;
+    padding: 15px;
+    box-shadow: -2px 0 5px rgba(0,0,0,0.5);
+    color: #fff;
+    z-index: 1001;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+  }
+  
+  .song-details-sidebar img {
+    width: 100%;
+    border-radius: 5px;
+    margin-bottom: 10px;
+  }
+  
+  .song-details-sidebar .song-meta {
+    text-align: left;
+  }
+  
+  .song-details-sidebar .song-meta h3 {
+    margin: 5px 0;
+    font-size: 1.2em;
+  }
+  
+  .song-details-sidebar .song-meta p {
+    margin: 2px 0;
+    font-size: 0.9em;
+  }
+  
+  /* Now Playing Page Specific Styles */
+  .now-playing-page {
+    min-height: calc(100vh - 60px); /* Adjust based on header height */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px; /* Increased padding for a less cramped feel */
+    padding-bottom: 100px; /* Ensure space above the fixed footer */
+    text-align: center;
+  }
+  
+  .now-playing-details {
+    background: #1e1e1e;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    margin-bottom: 20px;
+  }
+  
+  .now-playing-cover {
+    width: 300px;
+    height: auto;
+    border-radius: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .now-playing-meta h2 {
+    font-size: 2em;
+    margin-bottom: 10px;
+  }
+  
+  .now-playing-meta p {
+    font-size: 1.2em;
+    margin: 5px 0;
+  }
+  
+  .now-playing-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .now-playing-controls button {
+    background-color: #1DB954;
+    border: none;
+    padding: 12px 20px;
+    color: #fff;
+    font-size: 1.5em;
+    border-radius: 50%;
+    margin: 0 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .now-playing-controls button:hover {
+    background-color: #17a74a;
+  }
+  
+  .back-link {
+    display: inline-block;
+    background-color: #1DB954;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 20px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+    margin-top: 20px;
+  }
+  
+  .back-link:hover {
+    background-color: #17a74a;
+  }
+  
+  

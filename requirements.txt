@@ -1,0 +1,9 @@
+Flask
+Flask-SQLAlchemy
+Flask-Migrate
+Flask-Login
+Flask-WTF
+Werkzeug
+Mutagen==1.45.1
+gunicorn==20.1.0
+PyMySQL==1.0.2
